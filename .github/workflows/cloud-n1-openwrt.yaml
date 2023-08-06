@@ -18,7 +18,7 @@ env:
   CONFIG_SH: config.sh
   UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
-  KERNEL_VERSION: 6.1.34
+  KERNEL_VERSION: 6.1.1_5.15.1
 
 jobs:
   build_openwrt:
@@ -103,7 +103,8 @@ jobs:
         OPENWRT_ARMVIRT: openwrt/bin/targets/*/*/*.tar.gz
         PACKAGE_SOC: s905d
         KERNEL_VERSION_NAME: ${{ env.KERNEL_VERSION }}
-        WHOAMI: huangqian8
+        KERNEL_AUTO_LATEST: true
+        WHOAMI: cloud
 
     - name: Organize files
       id: organize
@@ -137,8 +138,7 @@ jobs:
 
           刷机固件简介：
             打包日期：${{ env.PACKAGED_OUTPUTDATE }}
-            内核版本：${{ env.KERNEL_VERSION }}
-            默认IP：192.168.1.1 默认用户名密码： root/password
+            默认IP：192.168.2.2 默认用户名密码： root/password
         artifacts: "${{ env.FIRMWARE }}/*.*,${{ env.PACKAGED_OUTPUTPATH }}/*.*"
 
     - name: Remove old Releases
